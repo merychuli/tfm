@@ -1,4 +1,13 @@
 """
+Nombre:     Creacion de dominios
+
+Objectivo:  Esta herramienta busca crear los dominios necesarios para las Feature Classes de la GDB
+            y los asigna automáticamente a los campos
+            
+Output:     La salida de esta herramienta es una GDB con todos los dominios modificados y las Feature
+            Classes con sus dominios asignados y listo para usar
+
+Copyright:  © 2025 María Pedrote Sanz
 
 """
 # ---- Modulos ----

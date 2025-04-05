@@ -19,9 +19,6 @@ import os
 data = arcpy.GetParameterAsText(0)
 output_folder = arcpy.GetParameterAsText(1)
 
-# data = r"D:\TFM\Datos\DatosCarteristas.xlsx"
-# output_fc = r"D:\TFM\TFM.gdb\Data\GeoDatosCarteristas"
-
 # ---- Constantes ----
 table = os.path.join(output_folder, "GeoData.csv")
 table2 = os.path.join(output_folder, "NonGeoData.csv")

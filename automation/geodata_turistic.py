@@ -1,11 +1,11 @@
 """
-Nombre:     GeoDatos Carteristas
+Nombre:     GeoDatos POI Turisticos
 
-Objectivo:  Esta herramienta tiene el objetivo de iterar por toda la tabla de datos y asignar las direcciones a todos esos
-            registros que proceden de transportes y tiene una parada asignada, con la dirección de la parada
+Objectivo:  Esta herramienta tiene el objetivo de convertir el XML con los datos turisticos del 
+            Ayuntamiento de Madrid a una Feature Class
 
-Output:     La salida de esta herramienta son 2 CSV, uno con todos lo registros de la tabla a los que se les ha encontrado
-            dirección, y otro CSV con los registros a los que no se les ha encontrado dirección
+Output:     La salida de esta herramienta es la Feature Class de POI_Turisticos dentro de nuestra GDB
+            en el Feature Dataset especificado en el sistema de coordenadas del proyecto
 
 Copyright:  © 2025 María Pedrote Sanz
 

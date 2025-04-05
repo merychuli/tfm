@@ -34,6 +34,7 @@ df_carteristas = pd.read_excel(xlsx_carteristas, index_col=None)
 dict_join = {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6-1': '6', '6-2': '6', '7a': '7', '7b': '7',
              '8': '8', '9A': '9', '9B': '9', '10a': '10', '10b': '10', '11': '11', '12-1': '12', '12-2': '12', 'R': 'R'}
 fc_distritos = r"D:\TFM\TFM.gdb\Admin\DISTRITOS"
+
 # ---- Main ----
 arcpy.AddMessage("---- INICIO ----")
 
@@ -56,8 +57,14 @@ for shp in shp_list:
 
     if 'Estaciones' in output_name:
         arcpy.management.SelectLayerByLocation("temp_lyr", "WITHIN", fc_distritos)
-
-        arcpy.conversion.ExportFeatures("temp_lyr", out_path)
+        if 'Metro' in output_name:
+            arcpy.management.Dissolve("temp_lyr", out_path, ['CODIGOCTME'], [["DISTRITO", "LAST"],
+                                                                             ["BARRIO", "LAST"],
+                                                                             ["GRADOACCES", "LAST"],
+                                                                             ["LINEAS", "LAST"],
+                                                                             ["DENOMINACI", "LAST"]])
+        else:
+            arcpy.conversion.ExportFeatures("temp_lyr", out_path)
     else:
         arcpy.management.SelectLayerByLocation("temp_lyr", "INTERSECT", fc_distritos)
 
@@ -77,7 +84,7 @@ for shp in shp_list:
             arcpy.management.Dissolve("temp_lyr", out_path, ['Linea'])
 
             # Añadimos los datos de afluencia de metro segun el campo linea
-            arcpy.management.AddJoin(out_path, "Linea", csv_afluencia_metro, "Linea")
+            arcpy.management.JoinField(out_path, "Linea", csv_afluencia_metro, "Linea")
 
         else:
             # Disolvemos en base al campo NUMEROLINE
