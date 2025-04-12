@@ -53,20 +53,4 @@ for buffer, field in dict_buffer.items():
     sel2 = arcpy.management.SelectLayerByLocation(carteristas, "INTERSECT", sel1)
     arcpy.management.CalculateField(sel2, field, buffer)
 
-# Modificamos los campos de GeoDatosCarteristas a SHORT
-for field in arcpy.ListFields(output_carteristas):
-    if 'USER' in field.name:
-        fields_tbm.append(field.name)
-for f in fields_tbm:
-    field_name = f.split("_")[1]
-    if field_name in field_names:
-        field_type = "TEXT"
-    else:
-        field_type = "SHORT"
-    arcpy.management.AddField(output_carteristas, field_name, field_type)
-    arcpy.management.CalculateField(output_carteristas, field_name, "!{}!".format(f))
-
-arcpy.management.DeleteField(output_carteristas, fields_tbm)
-arcpy.AddMessage("Campos cambiados de formato")
-
 arcpy.AddMessage("---- FIN ----")

@@ -40,7 +40,7 @@ output_distritos = os.path.join(gdb, "Analysis", "DistritosCarteristas")
 output_barrios = os.path.join(gdb, "Analysis", "BarriosCarteristas")
 
 # Fields
-fields_cart = ['Status', 'Score', 'Match_addr', 'PlaceName', 'AddNumFrom', 'StDir', 'Region', 'Postal', 'X', 'Y', 'IN_SingleLine', 'USER_Clan', 'USER_Accion', 'USER_Ubicacion', 'USER_Calle', 'USER_Fecha', 'USER_Transporte', 'USER_Linea', 'USER_Parada', 'USER_ModusOperandi', 'USER_Cantidad', 'USER_Violencia', 'USER_ActuacionPolicial', 'USER_Target', 'USER_Referencia', 'Clan2']
+fields_cart = ['Status', 'Score', 'Match_addr', 'PlaceName', 'AddNumFrom', 'StDir', 'Region', 'Postal', 'X', 'Y', 'IN_SingleLine', 'Clan', 'Accion', 'Ubicacion', 'Calle', 'Fecha', 'Transporte', 'Linea', 'Parada', 'ModusOperandi', 'Cantidad', 'Violencia', 'ActuacionPolicial', 'Target', 'Referencia']
 fields_comisarias = ['NOMBRE', 'TRANSPORTE', 'ACCESIBILIDAD', 'COD_BARRIO', 'BARRIO', 'COD_DISTRITO', 'DISTRITO', 'COORDENADA_X', 'COORDENADA_Y', 'LATITUD', 'LONGITUD']
 fields_poi = ['Nombre', 'Direccion', 'CP', 'Zona', 'Lat', 'Lon', 'Categoria', 'Subcategoria']
 fields_tbd_join = []
@@ -69,10 +69,10 @@ arcpy.AddMessage("Numero de carteristas calculado para distritos y barrios")
 
 for temp_lyr, output_fc in dict_outputs.items():
     # Calculamos el numero de carteristas según la ubicacion por barrio y distrito
-    sel = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "USER_Ubicacion = 1")
+    sel = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "Ubicacion = 1")
     calculate_points(temp_lyr, "temp_2", 'CarteristasCountCalle', sel, fields_cart)
 
-    sel2 = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "USER_Ubicacion = 2")
+    sel2 = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "Ubicacion = 2")
     calculate_points("temp_2", "temp_transport", 'CarteristasCountTransp', sel2, fields_cart)
 
     arcpy.management.DeleteField("temp_transport", ["TARGET_FID", "TARGET_FID_1", "TARGET_FID_12"])
@@ -84,7 +84,7 @@ for temp_lyr, output_fc in dict_outputs.items():
 
     # Calculamos el número de datos de clanes en cada distrito y barrio
     for key, value in dict_clanes.items():
-        sel3 = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "USER_Clan = {}".format(key))
+        sel3 = arcpy.management.SelectLayerByAttribute(carteristas, "NEW_SELECTION", "Clan = {}".format(key))
         output = "temp_{}".format(key + 1)
         if key == 1:
             inp = "temp_transport"
