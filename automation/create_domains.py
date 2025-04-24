@@ -3,7 +3,7 @@ Nombre:     Creacion de dominios
 
 Objectivo:  Esta herramienta busca crear los dominios necesarios para las Feature Classes de la GDB
             y los asigna automáticamente a los campos
-        
+
 Output:     La salida de esta herramienta es una GDB con todos los dominios modificados y las Feature
             Classes con sus dominios asignados y listo para usar
 
@@ -30,7 +30,7 @@ target_domain = pd.read_excel(domains_xlsx, sheet_name="TARGET")
 bol_domain = pd.read_excel(domains_xlsx, sheet_name="BOL")
 assign_domain = pd.read_excel(domains_xlsx, sheet_name="ASSIGN")
 
-dict_ref = {"ACTION": action_domain, "LOCATION": loc_domain, "MOD_TRANS": transp_domain, "CLAN": clan_domain, 
+dict_ref = {"ACTION": action_domain, "LOCATION": loc_domain, "MOD_TRANS": transp_domain, "CLAN": clan_domain,
             "MOD_OPER": oper_domain, "TARGET": target_domain, "BOL": bol_domain}
 fc_list = []
 

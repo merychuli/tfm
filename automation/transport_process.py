@@ -89,7 +89,7 @@ for shp in shp_list:
         else:
             # Disolvemos en base al campo NUMEROLINE
             arcpy.management.Dissolve("temp_lyr", out_path, ['NUMEROLINE'])
-        
+
         # Eliminamos la capa tempral
         arcpy.management.Delete("temp_lyr")
 arcpy.AddMessage("Datos de tranporte exportados al FDs")
@@ -172,41 +172,4 @@ for dirpath, dirnames, filenames in walk:
                     cursor2.updateRow(row2)
 arcpy.AddMessage("Datos de carteristas añadidos")
 
-# aprx = arcpy.mp.ArcGISProject("CURRENT")
-# m = aprx.activeMap
-
-# # Agregar la capa al mapa
-# metro_lineas = os.path.join(output_dataset, "Metro_Tramos")
-# cercanias_lineas = os.path.join(output_dataset, "Cercanias_Tramos")
-
-# for fc in [metro_lineas, cercanias_lineas]:
-#     lyr = m.addDataFromPath(fc)
-#     arcpy.AddMessage(lyr.name)
-#     sym = lyr.symbology
-
-#     if "Metro" in fc:
-#         df_transporte = df_symbology[df_symbology['TipoTransporte'] == 2]
-#         field = ['Linea']
-#     else:
-#         df_transporte = df_symbology[df_symbology['TipoTransporte'] == 3]
-#         field = ['NUMEROLINE']
-
-#     colores = df_transporte.set_index("Linea")[["R", "G", "B", "A"]].apply(lambda row: row.tolist(), axis=1).to_dict()
-#     arcpy.AddMessage(colores)
-#     # Asignamos la simbologia
-#     if hasattr(sym, "renderer"):
-#         sym.updateRenderer("UniqueValueRenderer")
-#         sym.renderer.fields = field
-
-#         # Asignar colores a cada categoría
-#         for group in sym.renderer.groups:
-#             for item in group.items:
-#                 valor = item.values[0][0]
-#                 try:
-#                     item.symbol.color = {"RGB": colores[valor]}
-#                 except KeyError:
-#                     item.symbol.color = {"RGB": colores[int(valor)]}
-
-#                 lyr.symbology = sym
-#     del lyr
 arcpy.AddMessage("---- FIN ----")
