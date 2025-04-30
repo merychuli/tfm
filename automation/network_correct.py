@@ -36,7 +36,9 @@ arcpy.analysis.Intersect([temp_network, temp_network], temp_points, "ALL", None,
 # Dividimos la línea en los puntos
 arcpy.management.SplitLineAtPoint(temp_network, temp_points, output_fc)
 
+# Creamos el network dataset
 arcpy.na.CreateNetworkDataset(feature_ds, "OSM_footwayNetwork1", "OSM_Network1", "NO_ELEVATION")
 
+# Eliminamos los archivos temporales
 arcpy.management.Delete([temp_network, temp_points])
 arcpy.AddMessage("---- FIN ----")
